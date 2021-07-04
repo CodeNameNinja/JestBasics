@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Tutorial: Asyncronous_Testing</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,41 +17,44 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
-
-    
-
-
-
-    
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
+    <h1 class="page-title">Tutorial: Asyncronous_Testing</h1>
 
     <section>
-        <article><h1>JestBasics</h1>
-<h2>Link To Demo</h2>
-<p><a href="https://codenameninja.github.io/JestBasics/">Link</a></p></article>
-    </section>
 
+<header>
+    
 
+    <h2>Asyncronous_Testing</h2>
+</header>
 
+<article>
+    <h4>Setting an async function up</h4>
+<pre class="prettyprint source lang-javascript"><code>const asyncFunction = {
+    fetchUser: () => {
+        return axios.get('https://jsonplaceholder.typicode.com/users/1').then(({data}) => {
+            return data;
+        }).catch(err => {throw new Error('Data not available', err)});
+    }
+}
 
+module.exports = asyncFunction;
+</code></pre>
+<blockquote>
+<p>Please note!</p>
+<p><code>expect.assertions(1);</code></p>
+</blockquote>
+<p>with out the assertions and the <code>return</code> keyword the below would run and pass no matter what</p>
+<pre class="prettyprint source lang-javascript"><code>test(&quot;User fetched name should be Leanne Graham&quot;, () => {
+  expect.assertions(1);
+  return asyncFunction.fetchUser().then((data) => {
+    expect(data.name).toEqual(&quot;Leanne Graham&quot;);
+  });
+});
 
+</code></pre>
+</article>
+
+</section>
 
 </div>
 
